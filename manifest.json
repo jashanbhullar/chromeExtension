@@ -1,0 +1,46 @@
+{
+    "manifest_version":2,
+    "name" : "Talbrum",
+    "description" : "A talbrum browser extension for putting CVs into the talbrum HR platform, Use 'Alt+Shift+S' when on candidate's page",
+    "version" : "1.1.0",
+    "browser_action" : {
+        "default_popup" : "hello.html",
+        "default_icon" : "talbrum_icon.png"
+    },
+    "commands": {
+        "save" : {
+                "suggested_key" : {
+                    "default" : "Alt+Shift+S"
+                },
+                "description" : "Import this resume to talbrum"
+        }
+  },
+  "icons" : {
+      "16" : "talbrum_icon.png",
+      "32" : "talbrum_icon.png",
+      "48" : "talbrum_icon.png",
+      "64" : "talbrum_icon.png",
+      "128" : "talbrum_icon.png"
+  },
+  "permissions" : [
+      "storage",
+      "tabs",
+      "*://resdex.naukri.com/*",
+      "downloads"
+  ],
+  "content_scripts" : [
+      {
+          "matches" : ["*://resdex.naukri.com/*"],
+          "js" : ["naukri.js"]
+      },
+      {
+          "matches" : ["*://merahunar.talbrum.com/recruitment/cv/upload_cv?TalbrumExtension*"],
+          "js" : ["talbrum.js"],
+          "all_frames" : true,
+          "run_at" : "document_end"
+      }
+  ],
+  "background" : {
+      "scripts" : ["background.js"]
+  }
+}
